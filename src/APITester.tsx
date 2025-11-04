@@ -15,9 +15,9 @@ export function APITester() {
       const res = await fetch(url, { method });
 
       const data = await res.json();
-      responseInputRef.current!.value = JSON.stringify(data, null, 2);
+      if (responseInputRef.current) responseInputRef.current.value = JSON.stringify(data, null, 2);
     } catch (error) {
-      responseInputRef.current!.value = String(error);
+      if (responseInputRef.current) responseInputRef.current.value = String(error);
     }
   };
 

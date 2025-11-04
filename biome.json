@@ -12,8 +12,19 @@
 				"noUnusedTemplateLiteral": "error",
 				"useNumberNamespace": "error",
 				"noInferrableTypes": "error",
-				"noUselessElse": "error"
+				"noUselessElse": "error",
+				"noNonNullAssertion": "off"
 			}
 		}
+	},
+	"formatter": {
+		"indentWidth": 2,
+		"indentStyle": "space"
+	},
+	"files": {
+		"includes": [
+			"src/**/*",
+			"!src/frontend.*"
+		]
 	}
 }
