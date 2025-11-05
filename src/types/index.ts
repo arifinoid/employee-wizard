@@ -1,4 +1,9 @@
-export type Role = "admin" | "ops";
+import { z } from 'zod'
+
+export const roleSearchSchema = z.object({
+  role: z.enum(['admin', 'ops']).catch('ops').default('ops'),
+})
+export type Role = z.infer<typeof roleSearchSchema>['role']
 
 export interface BasicInfo {
   fullName: string;
@@ -15,7 +20,7 @@ export interface Details {
   notes: string;
 }
 
-export interface Employee extends BasicInfo, Details {}
+export interface Employee extends BasicInfo, Details { }
 
 export interface Department {
   id: number;
