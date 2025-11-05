@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  json-server-step1:
+    image: clue/json-server
+    ports:
+      - "4001:80"
+    volumes:
+      - ./json-server/db-step1.json:/data/db.json:ro
+    command: --watch /data/db.json --static ./json-server
+
+  json-server-step2:
+    image: clue/json-server
+    ports:
+      - "4002:80"
+    volumes:
+      - ./json-server/db-step2.json:/data/db.json:ro
+    command: --watch /data/db.json --static ./json-server
