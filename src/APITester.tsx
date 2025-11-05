@@ -1,4 +1,4 @@
-import { useRef, type FormEvent } from "react";
+import { type FormEvent, useRef } from "react";
 
 export function APITester() {
   const responseInputRef = useRef<HTMLTextAreaElement>(null);
@@ -15,9 +15,11 @@ export function APITester() {
       const res = await fetch(url, { method });
 
       const data = await res.json();
-      if (responseInputRef.current) responseInputRef.current.value = JSON.stringify(data, null, 2);
+      if (responseInputRef.current)
+        responseInputRef.current.value = JSON.stringify(data, null, 2);
     } catch (error) {
-      if (responseInputRef.current) responseInputRef.current.value = String(error);
+      if (responseInputRef.current)
+        responseInputRef.current.value = String(error);
     }
   };
 
@@ -28,12 +30,23 @@ export function APITester() {
           <option value="GET">GET</option>
           <option value="PUT">PUT</option>
         </select>
-        <input type="text" name="endpoint" defaultValue="/api/hello" className="url-input" placeholder="/api/hello" />
+        <input
+          type="text"
+          name="endpoint"
+          defaultValue="/api/hello"
+          className="url-input"
+          placeholder="/api/hello"
+        />
         <button type="submit" className="send-button">
           Send
         </button>
       </form>
-      <textarea ref={responseInputRef} readOnly placeholder="Response will appear here..." className="response-area" />
+      <textarea
+        ref={responseInputRef}
+        readOnly
+        placeholder="Response will appear here..."
+        className="response-area"
+      />
     </div>
   );
 }

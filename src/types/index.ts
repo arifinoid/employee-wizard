@@ -1,4 +1,4 @@
-export type Role = 'admin' | 'ops';
+export type Role = "admin" | "ops";
 
 export interface BasicInfo {
   fullName: string;
