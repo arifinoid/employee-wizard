@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
+import { useDebounce } from './useDebounce'
 
 export function useFormDraft(role: string | undefined, payload: any, onRestore?: (draft: any) => void) {
-  const saveTimer = useRef<number | null>(null)
   const restoredRef = useRef(false)
 
   useEffect(() => {
@@ -21,26 +21,14 @@ export function useFormDraft(role: string | undefined, payload: any, onRestore?:
 
   }, [role, onRestore])
 
+  const debouncedPayload = useDebounce(payload, 2000)
+
   useEffect(() => {
     if (!role) return
-    if (saveTimer.current) {
-      window.clearTimeout(saveTimer.current)
+    try {
+      localStorage.setItem(`draft_${role}`, JSON.stringify(debouncedPayload))
+    } catch (e) {
+      console.warn('useFormDraft: save failed', e)
     }
-
-    saveTimer.current = window.setTimeout(() => {
-      try {
-        localStorage.setItem(`draft_${role}`, JSON.stringify(payload))
-      } catch (e) {
-        console.warn('useFormDraft: save failed', e)
-      }
-      saveTimer.current = null
-    }, 2000)
-
-    return () => {
-      if (saveTimer.current) {
-        window.clearTimeout(saveTimer.current)
-        saveTimer.current = null
-      }
-    }
-  }, [role, payload])
+  }, [role, debouncedPayload])
 }
