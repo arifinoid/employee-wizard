@@ -12,7 +12,8 @@
     "build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
     "start": "NODE_ENV=production bun src/index.tsx",
     "lint": "biome check",
-    "lint:fix": "biome check --write"
+    "lint:fix": "biome check --write",
+    "test": "bun test"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.134.12",
@@ -22,11 +23,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
+    "@happy-dom/global-registrator": "^20.0.10",
     "@tanstack/react-router-devtools": "^1.134.12",
     "@tanstack/router-cli": "^1.134.12",
     "@tanstack/router-plugin": "^1.134.12",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/bun": "latest",
     "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "@types/react-dom": "^19",
+    "happy-dom": "^20.0.10",
+    "jsdom": "^27.1.0",
+    "ts-jest": "^29.4.5",
+    "vitest": "^4.0.7"
   }
 }
